@@ -1,5 +1,6 @@
+// src/pages/MenuPage.jsx
 import React, { useState } from 'react';
-import './App.css';
+import '../../app.css'; // sube un nivel para importar los estilos
 
 const images = [
   {
@@ -124,7 +125,6 @@ const images = [
   }
 ];
 
-
 const categories = [
   "todos",
   "desayuno",
@@ -134,7 +134,7 @@ const categories = [
   "postre"
 ];
 
-function App() {
+function Menu() {
   const [selectedCategory, setSelectedCategory] = useState("todos");
 
   const filteredImages = selectedCategory 
@@ -187,4 +187,4 @@ function App() {
   );
 }
 
-export default App;
+export default Menu;
