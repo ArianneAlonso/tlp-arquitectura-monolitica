@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMugHot } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 
-const Inicio = () => {
+const Inicio = ({ onLoginClick, onRegisterClick }) => {
   return (
     <section
       id="inicio"
@@ -102,10 +102,17 @@ const Inicio = () => {
           transition={{ delay: 1.3, duration: 1 }}
           className="mt-10 flex gap-6"
         >
-          <button className="px-6 py-3 rounded-full border-2 border-orange-400 text-orange-100 font-semibold text-lg hover:bg-orange-400/20 hover:scale-105 transition-all duration-300 shadow-lg backdrop-blur-sm">
+          <button
+            onClick={onLoginClick}
+            className="px-6 py-3 rounded-full border-2 border-orange-400 text-orange-100 font-semibold text-lg hover:bg-orange-400/20 hover:scale-105 transition-all duration-300 shadow-lg backdrop-blur-sm"
+          >
             Iniciar sesión
           </button>
-          <button className="px-6 py-3 rounded-full bg-orange-400 text-white font-semibold text-lg hover:bg-orange-500 hover:scale-105 transition-all duration-300 shadow-lg">
+
+          <button
+            onClick={onRegisterClick}
+            className="px-6 py-3 rounded-full bg-orange-400 text-white font-semibold text-lg hover:bg-orange-500 hover:scale-105 transition-all duration-300 shadow-lg"
+          >
             Registrarse
           </button>
         </motion.div>

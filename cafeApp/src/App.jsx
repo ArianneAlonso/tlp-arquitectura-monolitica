@@ -4,14 +4,22 @@ import Inicio from './components/Sections/inicio'
 import Historia from './components/Sections/historia'
 import Horarios from './components/Sections/horarios'
 import Footer from './components/Layout/Footer'
+import Login from './components/Auth/login'
+import Register from './components/Auth/register'
 
 function App() {
+  const [showLogin, setShowLogin] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
+
   return (
     <>
       <Nav />
 
       {/* SECTION: INICIO */}
-      <Inicio/>
+      <Inicio
+        onLoginClick={() => setShowLogin(true)}
+        onRegisterClick={() => setShowRegister(true)}
+      />
 
       {/* SECTION: TIPO DE MENÚ */}
       <section
@@ -36,13 +44,17 @@ function App() {
       </section>
 
       {/* SECTION: HISTORIA */}
-      <Historia/>
+      <Historia />
 
       {/* SECTION: HORARIOS */}
-      <Horarios/>
+      <Horarios />
 
       {/*Footer*/}
-      <Footer/>
+      <Footer />
+
+      {/* MODALES */}
+      <Login isOpen={showLogin} onClose={() => setShowLogin(false)} />
+      <Register isOpen={showRegister} onClose={() => setShowRegister(false)} />
     </>
   )
 }
