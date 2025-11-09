@@ -1,188 +1,167 @@
-// src/pages/MenuPage.jsx
-import React, { useState } from 'react';
-import '../../app.css'; // sube un nivel para importar los estilos
+import React, { useState, useEffect } from "react";
 
 const images = [
   {
-    img: '/a_tartadeplantadevoradoradehombres.webp',
-    title: 'Tarta de planta devoradora de hombres',
-    ingredients: 'Caldo de escorpión, gelatina de baba, Baraselia, Meeroak, Betan, sal, pimienta',
-    texture: 'Tarta horneada con superficie crujiente, decorada con rodajas de verduras, esponjosa por dentro',
-    category: ['todos', 'postre', 'merienda', 'desayuno'],
-    price: '$10000'
+    img: "/a_tartadeplantadevoradoradehombres.webp",
+    title: "Tarta de planta devoradora de hombres",
+    ingredients:
+      "Caldo de escorpión, gelatina de baba, Baraselia, Meeroak, Betan, sal, pimienta",
+    texture:
+      "Tarta horneada con superficie crujiente, decorada con rodajas de verduras, esponjosa por dentro",
+    category: ["todos", "postres y panadería"],
+    price: "$10.000",
   },
   {
-    img: '/b_almuerzodeverdurasfrescasdelcampoGolem.webp',
-    title: 'Almuerzo de verduras frescas del campo Golem',
-    ingredients: 'Repollo, zanahorias, patatas, cebollas, tocino de basilisco, sal, pimienta, agua, nabos, hojas de zanahoria, aceite de oliva',
-    texture: 'Sopa caliente y sustanciosa, verduras suaves, caldo con sabor a tocino',
-    category: ['todos', 'almuerzo'],
-    price: '$3000'
+    img: "/h_carnealaparrillaKelpie.webp",
+    title: "Carne a la parrilla de Kelpie",
+    ingredients:
+      "Ronda, lomo, chuleta, filete, hígado, plato, cola, crin, repollo, cebolla",
+    texture:
+      "Gran variedad de texturas cárnicas, desde magras hasta jugosas, con vegetales suaves",
+    category: ["todos", "salados"],
+    price: "$8.000",
   },
   {
-    img: '/c_salteadoalestiloenanodearmaduravivienteysopadearmaduraviviente.webp',
-    title: 'Salteado y sopa al estilo enano de armadura viviente',
-    ingredients: 'Hierba antídoto, hierba medicinal, armadura viviente, salsa especial, sal, pimienta',
-    texture: 'Salteado con textura de champiñones y hojas medicinales, sopa sabrosa',
-    category: ['todos', 'almuerzo'],
-    price: '$5000'
+    img: "/k_tortillademandragoraybasilisco.webp",
+    title: "Tortilla de mandrágora y basilisco",
+    ingredients:
+      "Mandrágora, tocino de basilisco, huevo de basilisco, sal, pimienta, ketchup",
+    texture: "Cremosa y esponjosa, centro derretido con relleno jugoso",
+    category: ["todos", "salados"],
+    price: "$5.000",
   },
   {
-    img: '/d_kakiagedemandragoraytempurademurcielagogigante.webp',
-    title: 'Kakiage de mandrágora y tempura de murciélago gigante',
-    ingredients: 'Mandrágora, pechuga de murciélago, huevo de basilisco, harina, agua, salsa de soja, sake, sal, ajo, jengibre',
-    texture: 'Crujiente, fritura hojaldrada, dorada y ligera',
-    category: ['todos', 'cena'],
-    price: '$3500'
+    img: "/n_sorbetedeexorcismo.webp",
+    title: "Sorbete de exorcismo",
+    ingredients: "Agua bendita, frasco, cuerda sagrada, fantasmas",
+    texture: "Sorbete suave y colorido, decorado con menta y caramelos",
+    category: ["todos", "postres y panadería"],
+    price: "$9.000",
   },
   {
-    img: '/e_bocadillosdeinsectosdeltesoronaturalmentedeliciosos.webp',
-    title: 'Bocadillos de insectos del tesoro naturalmente deliciosos',
-    ingredients: 'Nido de insectos del tesoro, agua, azúcar, chinches moneda, aceite, sal, ciempiés perla',
-    texture: 'Mermelada gelatinosa, galletas crocantes, ciempiés cremoso, bollos suaves',
-    category: ['todos', 'postre', 'merienda'],
-    price: '$4000'
+    img: "/b_almuerzodeverdurasfrescasdelcampoGolem.webp",
+    title: "Almuerzo de verduras frescas del campo Golem",
+    ingredients:
+      "Repollo, zanahorias, patatas, cebollas, tocino de basilisco, sal, pimienta",
+    texture: "Sopa caliente y sustanciosa, verduras suaves, caldo con sabor a tocino",
+    category: ["todos", "salados"],
+    price: "$3.000",
   },
   {
-    img: '/f_mimicahervida.webp',
-    title: 'Mímica hervida',
-    ingredients: 'Parte superior del cuerpo mímica, garras, patas, sal',
-    texture: 'Jugosa, carne firme tipo cangrejo, pinzas grandes',
-    category: ['todos', 'cena'],
-    price: '$8000'
+    img: "/j_basiliscoasado.webp",
+    title: "Café Basilisco",
+    ingredients: "Granos mágicos tostados, aroma intenso, toque de hierba de maná",
+    texture: "Espuma densa y aroma cautivante",
+    category: ["todos", "cafés"],
+    price: "$2.500",
   },
-  {
-    img: '/g_parasitogigantedelKrakengigantealaparrillasimpleyestilokabayaki.webp',
-    title: 'Parásito gigante del kraken gigante a la parrilla estilo kabayaki',
-    ingredients: 'Parásito gigante, salsa (soja, mirin, azúcar, sake)',
-    texture: 'Asado, superficie caramelizada, jugoso por dentro',
-    category: ['todos', 'cena'],
-    price: '$7000'
-  },
-  {
-    img: '/h_carnealaparrillaKelpie.webp',
-    title: 'Carne a la parrilla de Kelpie',
-    ingredients: 'Ronda, lomo, chuleta, filete, hígado, plato, cola, crin (plantas acuáticas), repollo, cebolla',
-    texture: 'Gran variedad de texturas cárnicas, desde magras hasta jugosas, con vegetales suaves',
-    category: ['todos', 'almuerzo'],
-    price: '$10000'
-  },
-  {
-    img: '/i_gachasdeavenahechascongranosqueestabanporahi.webp',
-    title: 'Gachas de avena con granos que estaban por ahí',
-    ingredients: 'Cebada, agua, sal, carne de imitación, algas acuáticas',
-    texture: 'Cremoso, con crujientes huevas, carne blanda, algas suaves',
-    category: ['todos', 'desayuno', 'merienda'],
-    price: '$9000'
-  },
-  {
-    img: '/j_basiliscoasado.webp',
-    title: 'Basilisco asado',
-    ingredients: 'Basilisco, hierba de maná, sal, pimienta, hierba antídoto, hierba medicinal fuerte, ultra medicinal, antiparálisis, antipetrificación',
-    texture: 'Como pollo rostizado, piel crujiente, carne jugosa',
-    category: ['todos', 'almuerzo'],
-    price: '$10000'
-  },
-  {
-    img: '/k_tortillademandragoraybasilisco.webp',
-    title: 'Tortilla de mandrágora y basilisco',
-    ingredients: 'Mandrágora, tocino de basilisco, huevo de basilisco, sal, pimienta, ketchup',
-    texture: 'Cremosa y esponjosa, centro derretido con relleno jugoso',
-    category: ['todos', 'desayuno', 'merienda'],
-    price: '$5000'
-  },
-  {
-    img: '/l_cocinadelaCorteMenucompleto.webp',
-    title: 'Cocina de la corte - menú completo',
-    ingredients: 'Sopa de calabaza, salteado de soja verde y pescado blanco, fruta, pan dorado, asado de pato, queso de vaca dorado',
-    texture: 'Elegante, variado, presentación refinada y ligera',
-    category: ['todos', 'cena'],
-    price: '$25000'
-  },
-  {
-    img: '/m_verdurasrecienrobadasypolloguisadoconrepolloacompañadodepansaqueado.webp',
-    title: 'Verduras robadas y pollo guisado con repollo y pan saqueado',
-    ingredients: 'Pollo, repollo, zanahorias, cebollas, pimienta de cayena, sal, harina, aceite, masa madre, azúcar',
-    texture: 'Guisado espeso con pan horneado y verduras tiernas',
-    category: ['todos', 'almuerzo'],
-    price: '$14000'
-  },
-  {
-    img: '/n_sorbetedeexorcismo.webp',
-    title: 'Sorbete de exorcismo',
-    ingredients: 'Agua bendita, frasco, cuerda sagrada, fantasmas',
-    texture: 'Sorbete suave y colorido, decorado con menta y caramelos, textura cremosa y fría',
-    category: ['todos', 'postre', 'merienda'],
-    price: '$9000'
-  },
-  {
-    img: '/o_enormeestofadodeescorpionyhongoandante.webp',
-    title: 'Enorme estofado de escorpión y hongo andante',
-    ingredients: 'Escorpión, hongo andante, algas, invertebrados, baba seca, agua',
-    texture: 'Estofado hirviendo, fideos de baba gelatinosos, trozos jugosos y vegetales variados',
-    category: ['todos', 'cena'],
-    price: '$22000'
-  }
 ];
 
-const categories = [
-  "todos",
-  "desayuno",
-  "almuerzo",
-  "merienda",
-  "cena",
-  "postre"
-];
+const categories = ["todos", "cafés", "postres y panadería", "salados"];
 
 function Menu() {
   const [selectedCategory, setSelectedCategory] = useState("todos");
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const filteredImages = selectedCategory 
-    ? images.filter(img => img.category.includes(selectedCategory))
-    : images;
+  // 🚫 Desactivar scroll global
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => (document.body.style.overflow = "auto");
+  }, []);
+
+  const filteredImages = images.filter(
+    (img) =>
+      img.category.includes(selectedCategory) &&
+      img.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
-    <div className="app">
-      <header className="app-header">
-        <h1>¡SABORES MONSTRUOSOS!</h1>
-        <h2>DE LA MAZMORRA A TU MESA</h2>
+    <div className="h-screen flex flex-col bg-gradient-to-br from-amber-50 to-amber-100 overflow-hidden">
+      {/* 🔶 ENCABEZADO - buscador centrado y transparente */}
+      <header className="sticky top-0 z-30 w-full bg-amber-600/30 backdrop-blur-md py-4 px-6 flex items-center justify-center border-b border-amber-200/30">
+        <div className="relative w-350">
+          <input
+            type="text"
+            placeholder="Buscar un plato mágico..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full bg-transparent text-amber-900 placeholder-amber-600 py-2.5 pl-10 pr-4 
+                       focus:outline-none transition-all duration-300"
+          />
+          <span className="absolute right-3 top-2.5 text-amber-500 text-lg">🔍</span>
+        </div>
       </header>
 
-      <main className="main-container">
-        <aside className="filters">
-          <ul>
-            {categories.map((category, index) => (
-              <li 
-                key={index}
-                className={selectedCategory === category ? 'active' : ''}
-                onClick={() => setSelectedCategory(category === selectedCategory ? "todos" : category)}
-              >
-                {category.toUpperCase()}
-              </li>
-            ))}
-          </ul>
+      {/* 🔶 CONTENIDO PRINCIPAL */}
+      <div className="flex flex-1 overflow-hidden">
+        {/* 🟤 SIDEBAR */}
+        <aside
+          className="m-3 w-64 h-135 bg-amber-800/95 backdrop-blur-sm shadow-2xl border border-amber-700 
+             p-6 flex flex-col justify-between rounded-3xl transition-all duration-300"
+        >
+          <div>
+            <h2 className="text-2xl font-bold text-amber-100 mb-6 text-center drop-shadow-sm">
+              Categorías
+            </h2>
+            <ul className="space-y-3">
+              {categories.map((category, i) => (
+                <li
+                  key={i}
+                  className={`cursor-pointer text-center py-3 rounded-xl transition-all font-semibold ${selectedCategory === category
+                      ? "bg-amber-500 text-white shadow-md"
+                      : "hover:bg-amber-700 hover:text-amber-100 text-amber-200"
+                    }`}
+                  onClick={() => setSelectedCategory(category)}
+                >
+                  {category.toUpperCase()}
+                </li>
+              ))}
+            </ul>
+          </div>
         </aside>
 
-        <section className="menu-container">
-          <h2>MENÚ</h2>
-          <div className="food-gallery">
-            {filteredImages.map((item, index) => (
-              <div className="food-item" key={index}>
-                <img src={item.img} alt={item.title} />
-                <div className="food-info">
-                  <h3>{item.title}</h3>
-                  <p className="price">{item.price}</p>
-                  <div className="details">
-                    <p><strong>Ingredientes:</strong> {item.ingredients}</p>
-                    <p><strong>Textura:</strong> {item.texture}</p>
+
+        {/* 🟠 GALERÍA */}
+        <main className="flex-1 overflow-y-auto p-8">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {filteredImages.length > 0 ? (
+              filteredImages.map((item, index) => (
+                <div
+                  key={index}
+                  className="bg-white/80 backdrop-blur-sm shadow-lg rounded-xl overflow-hidden hover:shadow-2xl transition-all border border-amber-100"
+                >
+                  <img
+                    src={item.img}
+                    alt={item.title}
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="p-4">
+                    <h3 className="text-xl font-bold text-amber-800 mb-1">
+                      {item.title}
+                    </h3>
+                    <p className="text-amber-700 font-semibold mb-2">
+                      {item.price}
+                    </p>
+                    <p className="text-sm text-gray-600 mb-1">
+                      <strong>Ingredientes:</strong> {item.ingredients}
+                    </p>
+                    <p className="text-sm text-gray-600">
+                      <strong>Textura:</strong> {item.texture}
+                    </p>
+                    <button className="mt-4 w-full bg-amber-600 text-white py-2 rounded-md hover:bg-amber-700 transition">
+                      AÑADIR AL PEDIDO
+                    </button>
                   </div>
-                  <button className="order-btn">AÑADIR AL PEDIDO</button>
                 </div>
-              </div>
-            ))}
+              ))
+            ) : (
+              <p className="col-span-full text-center text-gray-600 text-lg font-semibold">
+                No se encontraron platos 🍰
+              </p>
+            )}
           </div>
-        </section>
-      </main>
+        </main>
+      </div>
     </div>
   );
 }

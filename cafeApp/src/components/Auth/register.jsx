@@ -1,45 +1,74 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser, faEnvelope, faLock, faMugHot } from "@fortawesome/free-solid-svg-icons";
 
-const Register = ({ isOpen, onClose }) => {
+const Register = ({ isOpen, onClose, onOpenLogin}) => {
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
-      <div className="bg-white rounded-3xl shadow-2xl p-8 max-w-sm w-full relative">
-        <h2 className="text-2xl font-bold text-amber-900 mb-5 text-center">
-          Crear Cuenta
-        </h2>
+      <div className="bg-gradient-to-b from-amber-50 to-white rounded-3xl shadow-2xl w-full max-w-md p-8 relative animate-fadeIn">
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-amber-700 hover:text-amber-900 text-2xl font-bold"
+        >
+          ✕
+        </button>
+
+        <div className="flex flex-col items-center mb-6">
+          <FontAwesomeIcon icon={faMugHot} className="text-5xl text-amber-800 mb-2" />
+          <h2 className="text-3xl font-extrabold text-amber-900">Crear Cuenta</h2>
+          <p className="text-sm text-amber-700">Sumate a nuestra comunidad cafetera</p>
+        </div>
 
         <form className="flex flex-col gap-4">
-          <input
-            type="text"
-            placeholder="Nombre"
-            className="border border-amber-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-amber-400"
-          />
-          <input
-            type="email"
-            placeholder="Correo electrónico"
-            className="border border-amber-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-amber-400"
-          />
-          <input
-            type="password"
-            placeholder="Contraseña"
-            className="border border-amber-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-amber-400"
-          />
+          <div className="flex items-center border border-amber-300 rounded-lg px-3 py-2 focus-within:ring-2 focus-within:ring-amber-400">
+            <FontAwesomeIcon icon={faUser} className="text-amber-700 mr-2" />
+            <input
+              type="text"
+              placeholder="Nombre completo"
+              className="w-full bg-transparent outline-none text-amber-900 placeholder-amber-400"
+            />
+          </div>
+
+          <div className="flex items-center border border-amber-300 rounded-lg px-3 py-2 focus-within:ring-2 focus-within:ring-amber-400">
+            <FontAwesomeIcon icon={faEnvelope} className="text-amber-700 mr-2" />
+            <input
+              type="email"
+              placeholder="Correo electrónico"
+              className="w-full bg-transparent outline-none text-amber-900 placeholder-amber-400"
+            />
+          </div>
+
+          <div className="flex items-center border border-amber-300 rounded-lg px-3 py-2 focus-within:ring-2 focus-within:ring-amber-400">
+            <FontAwesomeIcon icon={faLock} className="text-amber-700 mr-2" />
+            <input
+              type="password"
+              placeholder="Contraseña"
+              className="w-full bg-transparent outline-none text-amber-900 placeholder-amber-400"
+            />
+          </div>
+
           <button
             type="submit"
-            className="bg-amber-800 text-white py-2 rounded-lg hover:bg-amber-700 transition"
+            className="mt-2 bg-gradient-to-r from-amber-800 to-amber-700 text-white py-2 rounded-xl font-semibold hover:from-amber-700 hover:to-amber-600 transition"
           >
             Registrarse
           </button>
         </form>
 
-        <button
-          onClick={onClose}
-          className="absolute top-3 right-4 text-amber-600 hover:text-amber-800 text-xl"
-        >
-          ✕
-        </button>
+        <p className="text-center text-sm text-amber-700 mt-5">
+          ¿Ya tenés cuenta?{" "}
+          <span
+            className="text-amber-900 font-semibold cursor-pointer hover:underline"
+            onClick={() => {
+              onClose(); // cerrar register
+              onOpenLogin(); // abrir login
+            }}
+          >
+            Iniciá sesión
+          </span>
+        </p>
       </div>
     </div>
   );
