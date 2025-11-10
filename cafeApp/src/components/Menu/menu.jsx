@@ -212,7 +212,7 @@ function Menu() {
             <div className="relative w-350">
               <input
                 type="text"
-                placeholder="Buscar un plato mágico..."
+                placeholder="Buscar.."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full bg-transparent text-amber-600 placeholder-amber-600 py-2.5 pl-10 pr-4 focus:outline-none transition-all duration-300"
