@@ -19,7 +19,7 @@ const ModalMenu = ({ isOpen, onClose }) => {
       className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4"
     >
       <div
-        className="bg-amber-50 rounded-2xl shadow-2xl max-w-7xl w-full h-[90vh] relative overflow-hidden"
+        className="bg-amber-50 rounded-2xl shadow-2xl max-w-7xl w-full h-[95vh] relative overflow-hidden"
         onClick={(e) => e.stopPropagation()} // Evita cerrar al hacer clic dentro
       >
 
