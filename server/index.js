@@ -9,9 +9,9 @@ import { fileURLToPath } from "url";
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
-const JWT_SECRET = process.env.JWT_SECRET || "secreto123";
-const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/cafeteria";
+const PORT = process.env.PORT;
+const JWT_SECRET = process.env.JWT_SECRET;
+const MONGO_URI = process.env.MONGO_URI;
 
 mongoose
   .connect(MONGO_URI)
