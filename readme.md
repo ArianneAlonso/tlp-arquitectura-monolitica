@@ -8,8 +8,6 @@ El objetivo es diseñar e implementar una aplicación web funcional (**elegimos 
 En esta arquitectura, el sistema completo, incluyendo la lógica de negocio (server), la interfaz de usuario (cafeapp) y la persistencia de datos, se gestiona como una única unidad de despliegue.  
 El servidor backend es responsable tanto de servir la API como de entregar los archivos estáticos de la aplicación de cliente.
 
----
-
 ## 2. Tecnologías Implementadas
 
 - **Frontend:** React (con Vite y TailwindCSS)
@@ -18,8 +16,6 @@ El servidor backend es responsable tanto de servir la API como de entregar los a
 - **Autenticación:** JSON Web Tokens (JWT)  
 - **Seguridad:** bcrypt (para encriptación de contraseñas)  
 - **Gestión de Entorno:** dotenv  
-
----
 
 ## 3. Estructura del Repositorio
 
@@ -34,8 +30,6 @@ La estructura del proyecto separa el código del cliente y del servidor en dos d
 └── README.md
 ```
 
----
-
 ## 4. Instalación y Ejecución
 
 ### Requisitos Previos
@@ -43,8 +37,6 @@ La estructura del proyecto separa el código del cliente y del servidor en dos d
 - Node.js (v22.18.0)  
 - NPM (v10.9.3)  
 - MongoDB (una instancia local o un clúster de Atlas)
-
----
 
 ### 4.1. Configuración del Proyecto
 
@@ -60,22 +52,14 @@ cd tlp-arquitectura-monolitica
 Crear un archivo `.env` dentro de la carpeta `/server` con el siguiente contenido, ajustando `MONGODB_URI` según sea necesario:
 
 ```env
-MONGODB_URI=mongodb://localhost:27017/cafeteria
+MONGO_URI=mongodb://localhost:27017/cafeteria
 JWT_SECRET=bytecafeteriajwtsecret123456789
 PORT=5000
 ```
 
----
+### 4.2. Ejecución en Modo Desarrollo (una Terminal)
 
-### 4.2. Ejecución en Modo Desarrollo (Dos Terminales)
-
-**Terminal 1 (frontend):**
-
-```bash
-cd cafeapp
-npm install
-```
-**Terminal 2 (backend):**
+**Terminal 1 (backend):**
 
 ```bash
 cd server
@@ -104,8 +88,6 @@ El servidor backend estará corriendo en:
 - Confirmación de pedido con selección de método de pago (efectivo o tarjeta).  
 - Almacenamiento del pedido finalizado en la base de datos, asociándolo al usuario autenticado.
 
----
-
 ## 6. Documentación de Endpoints de la API
 
 La API de backend expone los siguientes endpoints principales:
@@ -115,13 +97,9 @@ La API de backend expone los siguientes endpoints principales:
  **POST**  `/api/pedidos`        Almacena un nuevo pedido en la base de datos. 
  **GET**   `/api/pedidos/:email` Obtiene el historial de pedidos de un usuario específico. 
 
----
-
 ## 7. Integrantes del Grupo
 
 - [Alonso Abril]  
 - [Franco Mirna]  
 - [Ocampo Emiliano]  
 - [Ramos Tomás]
-
----
