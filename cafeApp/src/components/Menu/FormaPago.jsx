@@ -11,37 +11,58 @@ function FormaPago({ cart, total, onBack }) {
     cvv: "",
   });
 
-  const handlePayment = () => {
-    alert("Pago realizado con éxito 💳 ¡Gracias por tu compra!");
+  const handlePayment = async () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user) {
+      alert("Debes iniciar sesión para confirmar tu pedido.");
+      return;
+    }
+
+    const pedido = {
+      userEmail: user.email,
+      cart,
+      total,
+      metodoPago: paymentMethod,
+    };
+
+    try {
+      const res = await fetch("/api/pedidos", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(pedido),
+      });
+
+      if (res.ok) {
+        alert("Pago realizado con éxito 💳 Tu pedido fue guardado en el sistema.");
+      } else {
+        alert("Error al guardar el pedido.");
+      }
+    } catch (error) {
+      alert("Ocurrió un error en el servidor.");
+      console.error(error);
+    }
   };
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-amber-50 via-amber-100 to-amber-50 px-6 py-12 relative overflow-hidden">
-      {/* Sombras decorativas suaves */}
       <div className="absolute top-0 left-0 w-60 h-60 bg-amber-300/20 rounded-full blur-3xl -z-10"></div>
       <div className="absolute bottom-0 right-0 w-72 h-72 bg-amber-400/20 rounded-full blur-3xl -z-10"></div>
 
-      {/* Contenedor principal */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="w-full max-w-md bg-white/80 backdrop-blur-lg border border-amber-200 rounded-3xl shadow-[0_15px_35px_rgba(0,0,0,0.1)] p-8"
       >
-        {/* Título */}
         <h1 className="text-3xl font-extrabold text-amber-900 text-center mb-8">
           Forma de Pago
         </h1>
 
-        {/* Total */}
         <div className="bg-gradient-to-r from-amber-400 to-amber-500 text-white rounded-2xl shadow-md p-5 text-center mb-8">
           <p className="text-lg font-medium">Total a pagar</p>
-          <p className="text-4xl font-bold mt-2">
-            ${total.toLocaleString("es-AR")}
-          </p>
+          <p className="text-4xl font-bold mt-2">${total.toLocaleString("es-AR")}</p>
         </div>
 
-        {/* Método de pago */}
         <div className="mb-6">
           <p className="font-semibold text-amber-800 mb-3 text-center">
             Seleccioná tu método de pago
@@ -70,7 +91,6 @@ function FormaPago({ cart, total, onBack }) {
           </div>
         </div>
 
-        {/* Datos de tarjeta */}
         {paymentMethod === "tarjeta" && (
           <motion.div
             initial={{ opacity: 0, y: 15 }}
@@ -82,18 +102,14 @@ function FormaPago({ cart, total, onBack }) {
               type="text"
               placeholder="Número de tarjeta"
               value={cardInfo.number}
-              onChange={(e) =>
-                setCardInfo({ ...cardInfo, number: e.target.value })
-              }
+              onChange={(e) => setCardInfo({ ...cardInfo, number: e.target.value })}
               className="w-full p-3 rounded-xl border border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-400 placeholder-gray-400 shadow-sm"
             />
             <input
               type="text"
               placeholder="Nombre en la tarjeta"
               value={cardInfo.name}
-              onChange={(e) =>
-                setCardInfo({ ...cardInfo, name: e.target.value })
-              }
+              onChange={(e) => setCardInfo({ ...cardInfo, name: e.target.value })}
               className="w-full p-2 rounded-xl border border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-400 placeholder-gray-400 shadow-sm"
             />
             <div className="flex gap-3">
@@ -101,25 +117,20 @@ function FormaPago({ cart, total, onBack }) {
                 type="text"
                 placeholder="MM/AA"
                 value={cardInfo.exp}
-                onChange={(e) =>
-                  setCardInfo({ ...cardInfo, exp: e.target.value })
-                }
+                onChange={(e) => setCardInfo({ ...cardInfo, exp: e.target.value })}
                 className="flex-1 p-1 rounded-xl border border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-400 placeholder-gray-400 shadow-sm"
               />
               <input
                 type="text"
                 placeholder="CVV"
                 value={cardInfo.cvv}
-                onChange={(e) =>
-                  setCardInfo({ ...cardInfo, cvv: e.target.value })
-                }
+                onChange={(e) => setCardInfo({ ...cardInfo, cvv: e.target.value })}
                 className="flex-1 p-1 rounded-xl border border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-400 placeholder-gray-400 shadow-sm"
               />
             </div>
           </motion.div>
         )}
 
-        {/* Botones */}
         <div className="flex gap-4 mt-8">
           <button
             onClick={onBack}
@@ -136,7 +147,6 @@ function FormaPago({ cart, total, onBack }) {
         </div>
       </motion.div>
 
-      {/* Footer */}
       <footer className="mt-8 text-amber-700 text-sm italic">
         “Gracias por elegirnos ☕ Tu momento perfecto comienza aquí.”
       </footer>
