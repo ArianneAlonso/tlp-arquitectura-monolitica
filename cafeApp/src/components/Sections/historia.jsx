@@ -30,18 +30,16 @@ const Historia = () => {
           </span>
         </h2>
 
-        {/* 🟠 Párrafo principal con color cálido y blur */}
         <p className="text-lg sm:text-xl leading-relaxed font-light text-orange-100/95 bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-amber-100/20 shadow-lg shadow-amber-900/10 transition-transform duration-700 hover:scale-[1.02]">
-          Nacimos en el corazón de la ciudad con un sueño simple: crear un espacio donde cada taza de café
-          cuente una historia.  
-          A lo largo de los años, crecimos gracias a vos, manteniendo siempre el sabor, el aroma y la calidez
-          que nos distinguen.
+          Desde nuestros inicios, buscamos elevar el café a una experiencia de lujo accesible.
+          Cada grano es cuidadosamente seleccionado, tostado y preparado para ofrecer una taza que combina aroma, sabor y elegancia.
+          Crecimos gracias a la pasión de quienes valoran la excelencia en cada detalle y la dedicación detrás de cada sorbo.
         </p>
 
-        {/* 🟤 Frase final con degradado dorado */}
         <p className="text-base sm:text-lg italic bg-gradient-to-r from-amber-200 via-orange-300 to-amber-400 bg-clip-text text-transparent drop-shadow-md">
-          “Cada sorbo es un recuerdo, cada aroma una historia que sigue viva.”
+          “Cada taza refleja nuestra dedicación; cada aroma despierta momentos inolvidables.”
         </p>
+
 
         {/* ✨ Línea decorativa igual que la del inicio */}
         <motion.div

@@ -26,9 +26,17 @@ const Nav = () => {
             icon={faMugHot}
             className="text-3xl text-amber-400 group-hover:text-orange-300 transition-all duration-500 transform group-hover:rotate-12"
           />
-          <span className="text-2xl font-bold tracking-wide text-white drop-shadow-lg transition-all duration-500 group-hover:text-amber-300">
-            Café Aromas
-          </span>
+          {/* Título con estilos diferenciados */}
+          <h1 className="text-2xl sm:text-3xl font-extrabold drop-shadow-[0_0_10px_rgba(255,180,100,0.5)]">
+            {/* Byte - moderno y brillante */}
+            <span className="text-orange-400 bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-yellow-300 to-amber-300 font-extrabold">
+              Byte
+            </span>{" "}
+            {/* Coffee - elegante, cursiva y suave */}
+            <span className="text-amber-200 font-serif italic bg-clip-text text-transparent bg-gradient-to-r from-amber-200 via-orange-200 to-amber-300">
+              Coffee
+            </span>
+          </h1>
         </div>
 
         {/* Botones animados con hover expandible (como antes) */}

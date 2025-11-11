@@ -15,19 +15,19 @@ const TipoMenu = () => {
     {
       titulo: "Cafés",
       descripcion:
-        "Espresso, capuccino, latte, mocaccino y más variedades para los amantes del café.",
+        "Espresso, capuccino, latte vainilla, chocolate caliente y más variedades para los amantes del café.",
       imagen: "/cafe.png",
     },
     {
       titulo: "Postres",
       descripcion:
-        "Tartas, brownies, tortas caseras y dulces que hacen feliz cualquier día.",
+        "Tartas, brownies, muffins y dulces que hacen feliz cualquier día.",
       imagen: "/dulce.png",
     },
     {
       titulo: "Salados",
       descripcion:
-        "Sandwiches, empanadas y tartas gourmet para un almuerzo o merienda completa.",
+        "Sandwiches, empanadas y Quiche para un almuerzo o merienda completa.",
       imagen: "/salado.png",
     },
   ];
