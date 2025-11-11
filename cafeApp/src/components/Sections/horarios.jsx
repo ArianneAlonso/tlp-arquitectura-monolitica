@@ -65,7 +65,7 @@ const Horarios = () => {
             </li>
             <li className="flex items-center justify-between text-amber-900">
               <span className="font-semibold">Domingos</span>
-              <span className="font-bold text-red-500">Cerrado</span>
+              <span className="font-semibold">Cerrado</span>
             </li>
           </ul>
         </motion.div>
