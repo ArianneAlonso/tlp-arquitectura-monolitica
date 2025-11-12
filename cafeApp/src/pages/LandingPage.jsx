@@ -20,14 +20,28 @@ const LandingPage = () => {
         onLoginClick={() => setShowLogin(true)}
         onRegisterClick={() => setShowRegister(true)}
       />
-      <TipoMenu/>
+      <TipoMenu />
       <Historia />
       <Horarios />
       <Footer />
 
-      {/* MODALES */}
-      <Login isOpen={showLogin} onClose={() => setShowLogin(false)} />
-      <Register isOpen={showRegister} onClose={() => setShowRegister(false)} />
+      {/* 🔒 Modales */}
+      <Login
+        isOpen={showLogin}
+        onClose={() => setShowLogin(false)}
+        onOpenRegister={() => {
+          setShowLogin(false);
+          setShowRegister(true);
+        }}
+      />
+      <Register
+        isOpen={showRegister}
+        onClose={() => setShowRegister(false)}
+        onOpenLogin={() => {
+          setShowRegister(false);
+          setShowLogin(true);
+        }}
+      />
     </>
   );
 };

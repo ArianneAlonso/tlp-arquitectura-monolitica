@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMugHot } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 
 const Inicio = ({ onLoginClick, onRegisterClick }) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // 🔹 Verificamos si hay un token guardado (puede ser en localStorage)
+    const token = localStorage.getItem("token");
+    if (token) setIsLoggedIn(true);
+  }, []);
+
+  // 🔹 Función para hacer scroll a la sección de menú
+  const handleScrollToMenu = () => {
+    const menuSection = document.getElementById("tipoMenu");
+    if (menuSection) {
+      menuSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <section
       id="inicio"
@@ -16,23 +32,20 @@ const Inicio = ({ onLoginClick, onRegisterClick }) => {
         className="absolute top-0 left-0 w-full h-full object-cover z-0"
       />
 
-      {/* Overlay semitransparente */}
+      {/* Overlay */}
       <div className="absolute top-0 left-0 w-full h-full bg-black/30 z-0"></div>
 
-      {/* Contenido principal */}
+      {/* Contenido */}
       <div className="relative text-white max-w-4xl z-10 px-6 py-12">
-        {/* Luces decorativas suaves */}
         <div className="absolute -top-24 -left-16 w-72 h-72 bg-amber-800/20 blur-3xl rounded-full"></div>
         <div className="absolute bottom-0 right-0 w-80 h-80 bg-orange-900/20 blur-3xl rounded-full"></div>
 
-        {/* Encabezado */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
           className="text-6xl sm:text-7xl font-extrabold mb-6 flex items-center gap-5 tracking-tight"
         >
-          {/* Taza animada */}
           <motion.span
             animate={{
               scale: [1, 1.1, 1],
@@ -56,21 +69,16 @@ const Inicio = ({ onLoginClick, onRegisterClick }) => {
             />
           </motion.span>
 
-          {/* Título con estilo diferenciado para cada palabra */}
           <h1 className="text-5xl sm:text-6xl drop-shadow-[0_0_15px_rgba(255,180,100,0.6)]">
-            {/* Byte - moderno y brillante */}
             <span className="text-orange-400 bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-yellow-300 to-amber-300 font-extrabold">
               Byte
             </span>{" "}
-            {/* Coffee - elegante, cursiva y suave */}
             <span className="text-amber-200 font-serif italic bg-clip-text text-transparent bg-gradient-to-r from-amber-200 via-orange-200 to-amber-300">
               Coffee
             </span>
           </h1>
-
         </motion.h1>
 
-        {/* Subtítulo */}
         <motion.h2
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -80,20 +88,8 @@ const Inicio = ({ onLoginClick, onRegisterClick }) => {
           “El arte del café, elevado a su máxima expresión”
         </motion.h2>
 
-        {/* Descripción */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-          className="text-lg text-gray-100 leading-relaxed max-w-3xl backdrop-blur-sm px-2 sm:px-0"
-        >
-          En <span className="text-orange-200 font-semibold">Byte Coffee</span> celebramos la elegancia de los detalles.
-          Cada taza es una obra cuidadosamente elaborada con granos seleccionados y tostados a la perfección.
-          Nuestro compromiso es ofrecerte una experiencia sensorial única, donde aroma, textura y sabor se fusionan
-          en un equilibrio perfecto.
-        </motion.p>
+        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }} className="text-lg text-gray-100 leading-relaxed max-w-3xl backdrop-blur-sm px-2 sm:px-0" > En <span className="text-orange-200 font-semibold">Byte Coffee</span> celebramos la elegancia de los detalles. Cada taza es una obra cuidadosamente elaborada con granos seleccionados y tostados a la perfección. Nuestro compromiso es ofrecerte una experiencia sensorial única, donde aroma, textura y sabor se fusionan en un equilibrio perfecto. </motion.p>
 
-        {/* Línea decorativa */}
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: "33%" }}
@@ -101,26 +97,37 @@ const Inicio = ({ onLoginClick, onRegisterClick }) => {
           className="mt-10 h-[2px] bg-gradient-to-r from-orange-400 to-amber-500 rounded-full shadow-[0_0_15px_rgba(255,180,100,0.3)]"
         ></motion.div>
 
-        {/* Botones de acción */}
+        {/* 🔸 Botones condicionales */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.3, duration: 1 }}
           className="mt-10 flex gap-6"
         >
-          <button
-            onClick={onLoginClick}
-            className="px-6 py-3 rounded-full border-2 border-orange-400 text-orange-100 font-semibold text-lg hover:bg-orange-400/20 hover:scale-105 transition-all duration-300 shadow-lg backdrop-blur-sm"
-          >
-            Iniciar sesión
-          </button>
+          {!isLoggedIn ? (
+            <>
+              <button
+                onClick={onLoginClick}
+                className="px-6 py-3 rounded-full border-2 border-orange-400 text-orange-100 font-semibold text-lg hover:bg-orange-400/20 hover:scale-105 transition-all duration-300 shadow-lg backdrop-blur-sm"
+              >
+                Iniciar sesión
+              </button>
 
-          <button
-            onClick={onRegisterClick}
-            className="px-6 py-3 rounded-full bg-orange-400 text-white font-semibold text-lg hover:bg-orange-500 hover:scale-105 transition-all duration-300 shadow-lg"
-          >
-            Registrarse
-          </button>
+              <button
+                onClick={onRegisterClick}
+                className="px-6 py-3 rounded-full bg-orange-400 text-white font-semibold text-lg hover:bg-orange-500 hover:scale-105 transition-all duration-300 shadow-lg"
+              >
+                Registrarse
+              </button>
+            </>
+          ) : (
+            <button
+              onClick={handleScrollToMenu}
+              className="px-6 py-3 rounded-full bg-orange-400 text-white font-semibold text-lg hover:bg-orange-500 hover:scale-105 transition-all duration-300 shadow-lg"
+            >
+              Explorar el menú
+            </button>
+          )}
         </motion.div>
       </div>
     </section>

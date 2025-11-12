@@ -95,7 +95,7 @@ const Footer = () => {
 
       {/* Línea inferior */}
       <div className="mt-10 border-t border-amber-700/50 pt-4 text-center text-sm text-amber-300/80">
-        © {new Date().getFullYear()} Café Aromas — Todos los derechos reservados.
+        © {new Date().getFullYear()} Byte Coffee — Todos los derechos reservados.
       </div>
     </footer>
   );
